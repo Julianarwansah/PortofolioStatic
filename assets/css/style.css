@@ -1259,10 +1259,16 @@ body {
     .hero-content {
         margin-top: 40px;
         text-align: center;
+        max-width: 100%;
     }
 
     .hero-img {
         max-width: 80%;
+        margin-left: 0;
+        margin-right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .highlight::after {
