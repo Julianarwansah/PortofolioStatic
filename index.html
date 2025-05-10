@@ -75,10 +75,12 @@
       <div class="about-visual" data-aos="fade-left">
         <div class="visual-card">
           <div class="card-bg"></div>
-          <div class="experience-badge">
-            <span class="exp-years">1+</span>
-            <span class="exp-text">Years Experience</span>
+
+          <!-- Gambar Foto Anda -->
+          <div class="profile-photo-wrapper">
+            <img src="assets/img/phjuli.png" alt="Foto Saya" class="profile-photo" />
           </div>
+
           <div class="pattern-dots"></div>
           <div class="floating-icons">
             <img src="assets/img/icons/html5.png" class="floating-icon" style="--delay: 0s" alt="">
@@ -87,6 +89,7 @@
           </div>
         </div>
       </div>
+
     </div>
 
     <!-- My Skills Section (moved outside about-content) -->
@@ -255,25 +258,25 @@
       </h2>
       <p class="contact-subtitle">Let's create something amazing together</p>
       
-      <form class="contact-form" data-aos="fade-up" data-aos-delay="100">
+      <form id="contact-form" class="contact-form" action="https://formspree.io/f/mrbqlorw" method="POST" data-aos="fade-up" data-aos-delay="100">
         <div class="form-group" data-aos="fade-right" data-aos-delay="150">
-          <input type="text" placeholder=" " required>
+          <input type="text" name="name" placeholder=" " required>
           <label>Your Name</label>
           <div class="underline"></div>
         </div>
-        
+
         <div class="form-group" data-aos="fade-right" data-aos-delay="200">
-          <input type="email" placeholder=" " required>
+          <input type="email" name="email" placeholder=" " required>
           <label>Your Email</label>
           <div class="underline"></div>
         </div>
-        
+
         <div class="form-group" data-aos="fade-right" data-aos-delay="250">
-          <textarea rows="5" placeholder=" " required></textarea>
+          <textarea name="message" rows="5" placeholder=" " required></textarea>
           <label>Your Message</label>
           <div class="underline"></div>
         </div>
-        
+
         <button type="submit" class="submit-btn" data-aos="fade-up" data-aos-delay="300">
           <span>Send Message</span>
           <div class="submit-icon">
@@ -283,6 +286,8 @@
           </div>
         </button>
       </form>
+      <!-- ✅ Notifikasi -->
+      <div id="form-alert" style="margin-top: 20px; display: none; padding: 10px; border-radius: 5px;"></div>
       
       <div class="social-links" data-aos="fade-up" data-aos-delay="350">
         <a href="https://www.instagram.com/iyan_juliann/" target="_blank" class="social-link">
@@ -340,5 +345,40 @@
     });
 
   </script>
+  <script>
+  const form = document.getElementById('contact-form');
+  const alertBox = document.getElementById('form-alert');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        alertBox.style.display = 'block';
+        alertBox.style.background = '#d4edda';
+        alertBox.style.color = '#155724';
+        alertBox.innerText = '✅ Pesan berhasil dikirim!';
+        form.reset();
+      } else {
+        throw new Error('Gagal mengirim');
+      }
+    } catch (error) {
+      alertBox.style.display = 'block';
+      alertBox.style.background = '#f8d7da';
+      alertBox.style.color = '#721c24';
+      alertBox.innerText = '❌ Terjadi kesalahan. Coba lagi nanti.';
+    }
+  });
+</script>
 </body>
 </html>
